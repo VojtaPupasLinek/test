@@ -1,11 +1,11 @@
 <div id="carousel-{$slideshow->id}" class="carousel slide carousel-fade" data-ride="carousel">
 
     {* Dots indicators *}
-    <ol class="carousel-indicators">
+    {*<ol class="carousel-indicators">
         {foreach $slides as $slide}
-            <li data-target="#carousel-{$slideshow->id}" data-slide-to="{$iterator->counter-1}" n:class="$iterator->first ? active"></li>
+            <li data-bs-target="#carousel-{$slideshow->id}" data-slide-to="{$iterator->counter-1}" n:class="$iterator->first ? active"></li>
         {/foreach}
-    </ol>
+    </ol>*}
 
     {* Items *}
     <div class="carousel-inner">

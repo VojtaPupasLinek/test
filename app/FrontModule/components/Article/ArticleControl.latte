@@ -1,22 +1,44 @@
-<div class="row article">
+{varType Oxit\Model\Article $article}
+
+{var $images = $article->getImages()}
+{var $videos = $article->getVideos()}
+{var $documents = $article->getDocuments()}
+
+<!----------původní row article--------->
+{*<div class="row article">
 	<div class="col-sm-12">
 		<h2>{$article->title|noescape}</h2>
+		{if $article->getImage()}
+			<img src="{$article->getImage()->getThumbsUrl()}" alt="{$article->title}">
+		{/if}
         {$article->content|noescape}
 	</div>
-</div>
+</div>*}
 
-{var $images = $article->related('articles2images')->order('order ASC')}
+<!----------new row article------->
+
+	<div class="row article">
+		  <div class=" col-12 col-lg-3">
+		  {if $article->getImage()}
+			  <img src="{$article->getImage()->getThumbsUrl()}" alt="{$article->title}" class="" id="heart-img">
+		  {/if}
+		  </div>
+		  <div class="col-12 col-lg-9 text-section">
+			  <h1>{$article->title|noescape}</h1>
+              {$article->content|noescape}
+		  </div>
+	</div>
+
+
+
 {if count($images)}
 	<h3>{_}Fotogalerie{/_}</h3>
 	<div class="row article-images">
-        {foreach $images as $articles2image}
-            {var $image = $articles2image->images}
-            {var $imgtitle = $articles2image->title_override ? $articles2image->title_override : $image->title}
-            {var $imgsubtitle = $articles2image->subtitle_override ? $articles2image->subtitle_override : $image->subtitle}
+        {foreach $images as $image}
 			<div class="col-sm-4">
 				<div class="article-images-item">
-					<a class="lightbox" rel="gallery-{$article->id}" href="/{$imagesFolder}/{$image->file}" title="{$imgtitle}{$imgsubtitle ? ' :: '.$imgsubtitle}">
-						<img class="img-fluid" src="/{$thumbFolder}/{$image->file}" alt="{$imgtitle}">
+					<a class="lightbox" rel="gallery-{$article->id}" href="{$image->getImagesUrl()}" title="{$image->title}{$image->subtitle ? ' :: '.$image->subtitle}">
+						<img class="img-fluid" src="{$image->getImagesUrl()}" alt="{$image->title}">
 					</a>
 				</div>
 			</div>
@@ -24,32 +46,26 @@
 	</div>
 {/if}
 
-{var $videos = $article->related('articles2videos')->order('order ASC')}
 {if count($videos)}
 	<h3>{_}Videa{/_}</h3>
 	<div class="row article-videos">
-        {foreach $videos as $articles2video}
-            {var $video = $articles2video->videos}
+        {foreach $videos as $video}
 			<div class="col-sm-4 article-videos-item">
 				<div class="embed-responsive{if $video->ratio} embed-responsive-{str_replace(":","by",$video->ratio)}{/if}">
-					<iframe class="embed-responsive-item" src="{$video->embed|videoEmbed}" allowfullscreen></iframe>
+					<iframe class="embed-responsive-item" src="{$video->getEmbed()}" allowfullscreen></iframe>
 				</div>
 			</div>
         {/foreach}
 	</div>
 {/if}
 
-{var $documents = $article->related('articles2documents')->order('order ASC')}
 {if count($documents)}
 	<h3>{_}Ke stažení{/_}</h3>
 	<div class="row article-attachments">
-        {foreach $documents as $articles2document}
-            {var $document = $articles2document->documents}
-            {var $doctitle = $articles2document->title_override ? $articles2document->title_override : $document->title}
-            {var $docsubtitle = $articles2document->subtitle_override ? $articles2document->subtitle_override : $document->subtitle}
+        {foreach $documents as $document}
 			<div class="col-sm-12 article-attachments-item">
-				<a href="/{$documentFolder}/{$document->file}" class="lightbox" title="{$doctitle}{$docsubtitle ? ' :: '.$docsubtitle}" target="_blank">
-					<span class="glyphicon glyphicon-file" aria-hidden="true"></span> {$doctitle}
+				<a href="{$document->getUrl()}" class="lightbox" title="{$document->title}{$document->subtitle ? ' :: '.$document->subtitle}" target="_blank">
+					<i class="fa fa-file-o" aria-hidden="true"></i> {$document->title}
 				</a>
 			</div>
         {/foreach}

@@ -4,9 +4,9 @@ var copyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	entry: {
-		head: ['./vendor/oxit/oxitweb-core/src/www/src/head-core.bundle.js'],
-		front: ['./vendor/oxit/oxitweb-core/src/www/src/core.bundle.js', './vendor/oxit/oxitweb-core/src/www/src/front.bundle.js', './gulp/src/front.bundle.js'],
-		admin: ['./vendor/oxit/oxitweb-core/src/www/src/core.bundle.js', './vendor/oxit/oxitweb-core/src/www/src/admin.bundle.js', './gulp/src/admin.bundle.js'],
+		head: ['./vendor/oxit/oxitweb-core/src/www/src/common-head.bundle-src.js'],
+		front: ['./vendor/oxit/oxitweb-core/src/www/src/common-core.bundle-src.js', './vendor/oxit/oxitweb-core/src/www/src/front.bundle-src.js', './www/src/front.bundle-src.js'],
+		admin: ['./vendor/oxit/oxitweb-core/src/www/src/common-core.bundle-src.js', './vendor/oxit/oxitweb-core/src/www/src/admin.bundle-src.js', './www/src/admin.bundle-src.js'],
 	},
 	mode: (process.env.NODE_ENV === 'production') ? 'production' : 'development',
 	resolve: {
@@ -50,7 +50,7 @@ module.exports = {
 			{from: './node_modules/tinymce/skins', to: './skins'},
 			{from: './node_modules/tinymce-i18n/langs5', to: './langs'},
 			{from: './node_modules/tinymce-emoji/dist/tinymce-emoji', to: './plugins/tinymceEmoji'},
-			{from: './node_modules/tinymce-plugin-responsive-image/lib/', to: './plugins/responsiveImage'}
+			// {from: './node_modules/tinymce-plugin-responsive-image/lib/', to: './plugins/responsiveImage'}
 		])
 	]
 };

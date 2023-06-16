@@ -11,7 +11,7 @@
 <meta name="robots" content="index, follow">
 
 <!-- FAVICON-->
-<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="/layout/favicon-bioar.svg">
 
 <!-- TITLE -->
 <title>{if (isset($seo_title) && $seo_title)}{$seo_title} | {else}{ifset $title}{_$title|striptags} | {/ifset}{/if}{control textSnippet-siteTitle,0}</title>
@@ -22,7 +22,7 @@
 <script src="https://oxit.cz/cookieBar/js.cookie.js"></script>
 <script src="https://oxit.cz/cookieBar/cookieBar.js"></script>
 
-	{css('/css/styles.min.css', true)}
+{*	{css('/css/styles.min.css', true)}*}
 	{css('/css/main.css', true)}
 
 	{include $vendorCoreFolder . 'www/js/head.latte'}
@@ -32,26 +32,64 @@
 
 <body>
 
-{include 'cookies.latte'}
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+<div class="container">
 
-<div class="container" n:block="header">
+{*{control navigation, $current}*}
+
+{*{include content}*}
+
+{*{control footer}*}
+
+{*{include 'cookies.latte'}*}
+<!------původní navigace----------------------->
+{*<div class="container" n:block="header">
 	<div class="row">
-		<div class="page-header col-md-12">
+
+<div class="page-header col-md-12">
 			<a class="navbar-brand float-left mr-5" href="/{$lang}">
-				<img class="responsive" src="/layout/oxit-logo.svg" alt="Logo">
+				<img class="responsive logo" src="/layout/centrumbioar-logo.png" alt="Logo">
 			</a>
 			<h1>{control textSnippet-webTitle}</h1>
-		</div>
-		<div class="menu-container col-sm-12">
-			{control navigation, $current}
-{*			{control pageNavigation, $current}*}
-		</div>
-	</div>
 </div>
 
-TEST
+		<div class="menu-container col-sm-12">
+			{control navigation, $current}
+		</div>
+	</div>
+</div>*}
+<!--------------------moje lišta-------------------------->
 
-<div n:block="flashes" class="flashes" n:snippet="flashes">
+			<div class="row header">
+				<!-- levá část s logem -->
+				<div class="col-9 col-lg-3">
+					<nav class="navbar navbar-expand-lg">
+						<a href="/" class="navbar-brand">
+							<img src="{$basePath}/layout/centrumbioar-logo2.png" alt="Logo" class="responsive logo">
+						</a>
+					</nav>
+				</div>
+				<!-- pravá část s menu a togglerem -->
+				<div class="col-3 col-lg-9 d-flex">
+					{control navigation, $current}
+				</div>
+			</div>
+
+
+
+	<!--------obrazek------------------------------------------------------------------>
+	{*<div class="container">
+			<div class="row p-5">
+				<div class="col-12">
+					<img src="{$basePath}/layout/heart-tree.jpg" alt="Tree" class="img-fluid">
+				</div>
+			</div>
+    </div>*}
+<!--------------------------------------------------------------------------------->
+
+{*{block breadcrumbs}
+	<div class="container">
+		{control breadcrumbs, $current}<div n:block="flashes" class="flashes" n:snippet="flashes">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -65,12 +103,9 @@ TEST
 		</div>
 	</div>
 </div>
-
-{block breadcrumbs}
-	<div class="container">
-		{control breadcrumbs, $current}
 	</div>
-{/block}
+{/block}*}
+
 
 
 
@@ -90,18 +125,28 @@ TEST
 	{/block}
 
 	{block afterContent}
-		{control contactForm}
+
+{*		{control contactForm}*}
+
+
 	{/block}
 
-</div><!-- main-content -->
+</div>
+<!-- main-content -->
+
 
 {block footer}
 	<footer>
 		<div class="container">
-			{* control navigationByShortcut, 'misc' *}
+
+
+{* {control navigationByShortcut, 'misc'}*}
+
 		</div>
 	</footer>
 {/block}
+
+
 
 {block modal}
 	<div id="default-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -119,7 +164,16 @@ TEST
 	</div>
 {/block}
 
+<!------------test------------------------------->
 
+
+
+<!-- Odkaz na Youtube -->
+{*<div class="text-center pt-3 pt-lg-5 pb-5">
+	<a href="https://www.youtube.com/channel/UCsLMvQpCgxYW_g6P4bY89SQ" class="btn btn-danger" target="_blank">Náš Youtube</a>
+</div>*}
+
+</div><!-------end of container--------->
 {block scripts}
 	{js('/dist/front.bundle.js', true)}
 

@@ -1,15 +1,24 @@
-# OXITweb
+# Centrum Bioar
 
-Základní web postavený na ***oxit/oxitweb-core***
+Web postavený na ***oxit/oxitweb-core***
 
 ## Instalace projektu
 ```shell
-composer install &&
-yarn &&
+composer install
+```
+
+## Package manager
+```shell
+yarn
+```
+```shell
 yarn build
 ```
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1310c3d (update to 0.30.2)
 ## Update oxit/oxitweb-core
 ```shell
 composer update oxit/oxitweb-core
@@ -26,17 +35,5 @@ composer update oxit/oxitweb-core -W
 rm -rf temp/cache && php bin/console migrations:continue
 ```
 
-## Zkompiluje a minifikuje scss a js
-```shell
-gulp compile
-```
+test
 
-## Spuštění Gulpu pro sledování .latte a kompilaci scss,js (režim app)
-```shell
-gulp watch
-```
-
-## Spuštění Gulpu pro sledování .html a kompilaci scss,js (režim šablony)
-```shell
-gulp watch --folder gulp
-```

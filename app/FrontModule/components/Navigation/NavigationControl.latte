@@ -1,14 +1,8 @@
 
-{**
- * The Navigation control template
- *
- * @param  Control   $control
-*}
-
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light w-100">
 	<!-- Brand and toggle get grouped for better mobile display -->
-	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+	<button type="button" class="navbar-toggler d-lg-none ms-auto" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span> <!-- or  <i class="fa fa-bars" aria-hidden="true"></i>  -->
 	</button>
 
@@ -16,7 +10,7 @@
 	<div class="collapse navbar-collapse" id="main-menu">
 
 		<!--samotné menu-->
-		<ul class="navbar-nav mr-auto">
+		<ul class="navbar-nav">
             {if $structure}
                 {foreach $structure as $i=>$structureitem}
                     {var $subitems_clone = clone $model_subitems}
@@ -25,6 +19,7 @@
                     {foreach $subitems as $j=>$subitem}
                         {if $subitem->id == $current}{var $subitem_active = true}{/if}
                     {/foreach}
+					<!--- položky menu--->
 					<li class="nav-item {if $structureitem->id == $current}active {/if}{if count($subitems)}dropdown {/if}">
 						<a class="nav-link {if $structureitem->id == $current || $subitem_active}active {/if}{if count($subitems)}dropdown-toggle {/if}" href="{if count($subitems)}#{else}{$structureitem|structureLink}{/if}" {if count($subitems)} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"{/if}>
                             {$structureitem->name}
@@ -44,7 +39,7 @@
 		</ul>
 
 		<!--jazyky-->
-		<ul class="navbar-nav d-flex order-3 ml-2">
+		{*<ul class="navbar-nav d-flex order-3 ml-2">
 			{foreach $langs as $select_lang}
 				{if $lang != $select_lang}
 					<li class="nav-item">
@@ -57,19 +52,51 @@
 			<li class="nav-item">
                 {control sign}
 			</li>
-		</ul>
+		</ul>*}
 
-
-		<form id="search_form" class="form-inline my-2 my-lg-0" action="{plink Search:}">
+		<!-- Vyhledávací Formulář -->
+		{*<form id="search_form" class="form-inline my-2 my-lg-0" action="{plink Search:}">
 			<div class="input-group">
 				<input type="text" class="form-control search-input" name="searchstring" aria-label="Search" id="searchstring" placeholder="{_}Search{/_}">
 				<div class="input-group-append">
 					<button type="submit" class="btn btn-default btn-success" id="submit_search">{_}Submit{/_}</button>
 				</div>
 			</div>
-		</form>
+		</form>*}
 
 	</div>
 	<!-- /.navbar-collapse -->
 </nav>
 
+
+
+{*<div class="container">
+	<div class="container mt-5">
+		<div class="row">
+			<div class="col-12">
+				<nav class="navbar navbar-expand-lg">
+					<a href="" class="navbar-brand">
+						<img src="{$basePath}/layout/centrumbioar-logo.png" alt="Logo" class="logo">
+					</a>
+					<!-- toggler button -->
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fas fa-bars"></i>
+					</button>
+
+					<!--   nav. menu - collapse -->
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<div class="navbar-nav ml-auto">
+							<a href="" class="nav-item nav-link">O nás</a>
+							<a href="" class="nav-item nav-link">Služby</a>
+							<a href="" class="nav-item nav-link">Produkt</a>
+							<a href="" class="nav-item nav-link">Krása</a>
+							<a href="" class="nav-item nav-link">Kalendář</a>
+							<a href="" class="nav-item nav-link">Eshop</a>
+							<a href="" class="nav-item nav-link">Kontaktní formulář</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>*}

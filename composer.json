@@ -36,7 +36,14 @@
 		}
 	],
 	"require": {
-		"oxit/oxitweb-core": "^0.43.4"
+<<<<<<< HEAD
+		"php": "8.1.*",
+		"oxit/oxitweb-core": "dev-main-php-8",
+		"jzechy/jquery-fileupload": "dev-main"
+=======
+	  	"oxit/oxitweb-core": "^0.30.2",
+	  	"jzechy/jquery-fileupload": "@dev"
+>>>>>>> 1310c3d (update to 0.30.2)
 	},
 	"autoload": {
 		"classmap": [
