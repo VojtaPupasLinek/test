@@ -1,0 +1,23 @@
+.article {
+	padding-bottom: 5rem;
+}
+
+.article-img {
+	width: 100%;
+	padding-top: 0rem;
+	margin-top: -2rem;
+	padding-bottom: 2rem;
+	@include media-breakpoint-up(lg) {
+		padding-top: 3rem;
+		margin-top: -0rem;
+	}
+}
+
+.text-section {
+	flex: 1;
+	padding-right: 20px;
+}
+
+.text-section p {
+	margin-bottom: 1em;
+}

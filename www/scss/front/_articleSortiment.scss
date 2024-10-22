@@ -1,0 +1,32 @@
+
+.sortiment {
+	margin-top: 0rem;
+	@include media-breakpoint-up(lg) {
+		margin-top: -7rem;
+	}
+}
+
+.sortiment-img {
+		transform: translateX(0rem) translateY(1rem);
+		@include media-breakpoint-up(lg) {
+			transform: translateX(-6rem) translateY(4rem);
+		}
+	}
+
+	//.sortiment-text {
+	//	padding-top: 0rem;
+	//	@include media-breakpoint-up(lg) {
+	//		padding-top: 10rem;
+	//	}
+	//}
+
+	.sortiment-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end; // Umístí obsah na dno
+	}
+
+	.sortiment-btn {
+		align-self: flex-end; // Zarovná tlačítko vpravo
+	}
+

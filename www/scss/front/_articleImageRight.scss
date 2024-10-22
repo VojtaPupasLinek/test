@@ -1,0 +1,21 @@
+
+.homepage {
+	padding-bottom: 5rem;
+}
+
+.homepage .col-lg-9 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transform: translateX(-6rem);
+}
+
+.homepage .btn {
+	margin-left: 1.5rem;
+	margin-top: 1rem;
+}
+
+.homepage img {
+	width:80%;
+	//transform: translateX(-6rem);
+}

@@ -1,0 +1,73 @@
+{varType Oxit\Model\Article $article}
+
+{var $images = $article->getImages()}
+{var $videos = $article->getVideos()}
+{var $documents = $article->getDocuments()}
+
+
+<div class="playground">
+	<div class="row">
+	  <div class="d-lg-flex col-lg-12">
+		  <div class="col-12 col-lg-3">
+			  {$article->content|noescape}
+		  </div>
+		  <div class="col-12 col-lg-9">
+			  <h1>nadpis 1</h1>
+			  <h2>nadpis 2</h2>
+			  <h3>nadpis 3</h3>
+			  <h4>nadpis 4</h4>
+			  <h5>nadpis 5</h5>
+			  <h6>nadpis 6</h6>
+
+
+			  <a href="#" class="btn btn-outline-primary">primary outline</a>
+			  <a href="#" class="btn btn-outline-primary">primary outline</a>
+			  <a href="#" class="btn btn-outline-primary">primary outline</a>
+			  <a href="#" class="btn btn-outline-primary">primary outline</a>
+
+		</div>
+	  </div>
+	</div>
+
+
+{if count($images)}
+	<h3>{_}Fotogalerie{/_}</h3>
+	<div class="row article-images">
+        {foreach $images as $image}
+			<div class="col-sm-4">
+				<div class="article-images-item">
+					<a class="lightbox" rel="gallery-{$article->id}" href="{$image->getImagesUrl()}" title="{$image->title}{$image->subtitle ? ' :: '.$image->subtitle}">
+						<img class="img-fluid" src="{$image->getImagesUrl()}" alt="{$image->title}">
+					</a>
+				</div>
+			</div>
+        {/foreach}
+	</div>
+{/if}
+
+{if count($videos)}
+	<h3>{_}Videa{/_}</h3>
+	<div class="row article-videos">
+        {foreach $videos as $video}
+			<div class="col-sm-4 article-videos-item">
+				<div class="embed-responsive{if $video->ratio} embed-responsive-{str_replace(":","by",$video->ratio)}{/if}">
+					<iframe class="embed-responsive-item" src="{$video->getEmbed()}" allowfullscreen></iframe>
+				</div>
+			</div>
+        {/foreach}
+	</div>
+{/if}
+
+{if count($documents)}
+	<h3>{_}Ke stažení{/_}</h3>
+	<div class="row article-attachments">
+        {foreach $documents as $document}
+			<div class="col-sm-12 article-attachments-item">
+				<a href="{$document->getUrl()}" class="lightbox" title="{$document->title}{$document->subtitle ? ' :: '.$document->subtitle}" target="_blank">
+					<i class="fa fa-file-o" aria-hidden="true"></i> {$document->title}
+				</a>
+			</div>
+        {/foreach}
+	</div>
+{/if}
+</div><!------playground---->

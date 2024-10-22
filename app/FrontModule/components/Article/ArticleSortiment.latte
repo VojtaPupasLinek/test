@@ -1,0 +1,83 @@
+{varType Oxit\Model\Article $article}
+
+{var $images = $article->getImages()}
+{var $videos = $article->getVideos()}
+{var $documents = $article->getDocuments()}
+
+<!----------původní row article--------->
+{*<div class="row article">
+	<div class="col-sm-12">
+		<h2>{$article->title|noescape}</h2>
+		{if $article->getImage()}
+			<img src="{$article->getImage()->getThumbsUrl()}" alt="{$article->title}">
+		{/if}
+        {$article->content|noescape}
+	</div>
+</div>*}
+
+<!----------new row article------->
+
+	<div class="row article sortiment">
+		  <div class=" col-12 col-lg-3">
+		  {*{if $article->getImage()}
+			  <img src="{$article->getImage()->getThumbsUrl()}" alt="{$article->title}" class="" id="heart-img">
+		  {/if}*}
+		  </div>
+		  <div class="col-12 col-lg-9">
+{*			  <h1>{$article->title|noescape}</h1>*}
+			  <div class="row">
+			  <div class="col-12 col-lg-6">
+			  {if $article->getImage()}
+				  <img src="{$article->getImage()->getThumbsUrl()}" alt="{$article->title}" class="sortiment-img" id="heart-img">
+			  {/if}
+			  </div>
+			  <div class="col-12 col-lg-6 sortiment-text">
+              {$article->content|noescape}
+			  <button type="button" class="btn btn-outline-success sortiment-btn">zjistit více</button>
+			  </div>
+			  </div>
+		  </div>
+	</div>
+
+
+
+{if count($images)}
+	<h3>{_}Fotogalerie{/_}</h3>
+	<div class="row article-images">
+        {foreach $images as $image}
+			<div class="col-sm-4">
+				<div class="article-images-item">
+					<a class="lightbox" rel="gallery-{$article->id}" href="{$image->getImagesUrl()}" title="{$image->title}{$image->subtitle ? ' :: '.$image->subtitle}">
+						<img class="img-fluid" src="{$image->getImagesUrl()}" alt="{$image->title}">
+					</a>
+				</div>
+			</div>
+        {/foreach}
+	</div>
+{/if}
+
+{if count($videos)}
+	<h3>{_}Videa{/_}</h3>
+	<div class="row article-videos">
+        {foreach $videos as $video}
+			<div class="col-sm-4 article-videos-item">
+				<div class="embed-responsive{if $video->ratio} embed-responsive-{str_replace(":","by",$video->ratio)}{/if}">
+					<iframe class="embed-responsive-item" src="{$video->getEmbed()}" allowfullscreen></iframe>
+				</div>
+			</div>
+        {/foreach}
+	</div>
+{/if}
+
+{if count($documents)}
+	<h3>{_}Ke stažení{/_}</h3>
+	<div class="row article-attachments">
+        {foreach $documents as $document}
+			<div class="col-sm-12 article-attachments-item">
+				<a href="{$document->getUrl()}" class="lightbox" title="{$document->title}{$document->subtitle ? ' :: '.$document->subtitle}" target="_blank">
+					<i class="fa fa-file-o" aria-hidden="true"></i> {$document->title}
+				</a>
+			</div>
+        {/foreach}
+	</div>
+{/if}

@@ -1,0 +1,119 @@
+.logo {
+	padding-top: 1rem;
+	padding-right: 1rem;
+	width: 10rem;
+	padding-bottom: 3.25rem;
+	transform: translateX(2.25rem);
+	@include media-breakpoint-up(lg) {
+		width: 14rem;
+	}
+}
+
+/*#main-menu {
+	justify-content: space-between!important; !* Rovnoměrné rozprostření položek menu *!
+}*/
+
+.header {
+	position: relative;
+}
+
+.navbar {
+	position: relative;
+}
+
+.header .col-lg-3 {
+	display: flex;
+	justify-content: start;  // Horizontální vycentrování
+	//align-items: center;      // Vertikální vycentrování
+	@include media-breakpoint-up(lg) {
+		justify-content: center;
+	}
+}
+
+.navbar-collapse {
+	position: absolute;
+	transition: max-height 0.3s ease;
+	//top: 100%; /* Umístění pod navbar */
+	//left: 0; /* Zarovnání vlevo */
+	//right: 0; /* Šířka menu se nastaví na 100% */
+	//z-index: 5; /* Méně než toggler, aby bylo zajištěno správné překrývání */
+}
+
+.navbar-brand {
+	display: flex;
+	align-items: center; /* Vertikálně vycentrováno */
+}
+
+.navbar-toggler {
+	background-image: none;
+	position: absolute;
+	right: 0.5rem; /* Zarovnání doprava */
+	top: 2.5rem;
+	margin-left: auto;
+	border: 1px solid #A3784B; /* Rámeček kolem tlačítka */
+	border-radius: 5px;
+	padding: 5px;
+	@include media-breakpoint-up(lg) {
+		top: 3.5rem;
+		right: 1rem;
+	}
+}
+
+.navbar-toggler .fas.fa-bars {
+	color: #A3784B !important; /* Barva ikony */
+	//font-size: 1.0em; /* Velikost ikony */
+	//@include media-breakpoint-up(lg) {
+	//	font-size: 1.4em; /* Velikost ikony */
+	//}
+}
+
+.navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23A3784B' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-nav {
+	line-height: 1.6rem;
+	margin-top: 18rem;
+	margin-left: -65vw;
+	display: flex;
+	background-color: white;
+	//opacity:85% ;
+	padding-bottom: 1rem;
+	padding-left: 1rem;
+	@include media-breakpoint-up(sm) {
+		margin-top: 16rem;
+		margin-left: -8rem;
+	}
+	@include media-breakpoint-up(md) {
+		margin-left: -4rem;
+	}
+	@include media-breakpoint-up(lg) {
+		margin-top: 1rem;
+		margin-left: -0.3rem;
+	}
+}
+
+.nav-link {
+	font-size: 1.2rem;
+	@include media-breakpoint-up(lg) {
+		font-size: 0.9rem;
+	}
+	@include media-breakpoint-up(xl) {
+		font-size: 1rem;
+	}
+}
+.navbar-nav .nav-link {
+	color: #A3784B !important;
+	text-transform: uppercase !important;
+	font-weight: bold;
+	padding: 0 0.8vw !important; /* mezery mezi odkazy */
+	text-decoration: none !important;
+}
+.navbar-nav .nav-link:hover {
+	color: #8B7DA5!important;
+	text-decoration: none;
+}
+
+.navbar-nav .nav-link.active {
+	color: #8B7DA5!important;
+}
