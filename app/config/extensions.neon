@@ -1,0 +1,5 @@
+#utils:
+#	translateDirs:
+#	 	{
+#	 		%appDir%/translations,
+#	 	}

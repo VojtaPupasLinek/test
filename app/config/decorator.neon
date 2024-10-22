@@ -1,0 +1,8 @@
+decorator:
+	Oxit\FrontModule\Presenters\BasePresenter:
+		setup:
+			- setLayout('%appDir%/FrontModule/templates/@layout.latte')
+
+	Oxit\AdminModule\Presenters\BasePresenter:
+		setup:
+			- setLayout('%appDir%/AdminModule/templates/@layout.latte')

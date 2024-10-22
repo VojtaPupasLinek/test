@@ -1,0 +1,2 @@
+services:
+	router: App\Services\Router\RouterFactory::createRouter(%default_lang%)

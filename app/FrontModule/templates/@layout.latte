@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="{if isset($lang) && ($lang != 'cz')}{$lang}{else}cs{/if}">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+
+<meta name="description" content="{if (isset($seo_description) && $seo_description)}{$seo_description}{else}{control textSnippet-siteDescription,0}{/if}">
+<meta name="keywords" content="{if (isset($seo_keywords) && $seo_keywords)}{$seo_keywords}{else}{control textSnippet-siteKeywords,0}{/if}">
+<meta name="author" content="OXIT s.r.o. www.oxit.cz">
+<meta name="robots" content="index, follow">
+
+<!-- FAVICON-->
+<link rel="icon" href="/favicon.ico">
+
+<!-- TITLE -->
+<title>{if (isset($seo_title) && $seo_title)}{$seo_title} | {else}{ifset $title}{_$title|striptags} | {/ifset}{/if}{control textSnippet-siteTitle,0}</title>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap&subset=latin-ext" rel="stylesheet">
+
+{js('/dist/head.bundle.js', true)}
+<script src="https://oxit.cz/cookieBar/js.cookie.js"></script>
+<script src="https://oxit.cz/cookieBar/cookieBar.js"></script>
+
+	{css('/css/styles.min.css', true)}
+	{css('/css/main.css', true)}
+
+	{include $vendorCoreFolder . 'www/js/head.latte'}
+
+	{block head}{/block}
+</head>
+
+<body>
+
+{include 'cookies.latte'}
+
+<div class="container" n:block="header">
+	<div class="row">
+		<div class="page-header col-md-12">
+			<a class="navbar-brand float-left mr-5" href="/{$lang}">
+				<img class="responsive" src="/layout/oxit-logo.svg" alt="Logo">
+			</a>
+			<h1>{control textSnippet-webTitle}</h1>
+		</div>
+		<div class="menu-container col-sm-12">
+			{control navigation, $current}
+{*			{control pageNavigation, $current}*}
+		</div>
+	</div>
+</div>
+
+TEST
+
+<div n:block="flashes" class="flashes" n:snippet="flashes">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div n:foreach="$flashes as $flash" class="alert-dismissible alert alert-{$flash->type}">
+					{_}{$flash->message}{/_}
+					<button type="button" class="close" data-dismiss="alert">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{block breadcrumbs}
+	<div class="container">
+		{control breadcrumbs, $current}
+	</div>
+{/block}
+
+
+
+
+<div class="main-content container" id="main-content">
+
+	{block beforeContent}{/block}
+
+	{block content}
+		{ifset $structureComponents}
+			{foreach $structureComponents as $component}
+				<div class="structureComponent-wrap" id="section-{if $component->title}{$component->title|webalize}{else}{$component->id}{/if}">
+					{control 'structureComponent' . $component->id}
+				</div>
+			{/foreach}
+		{/ifset}
+	{/block}
+
+	{block afterContent}
+		{control contactForm}
+	{/block}
+
+</div><!-- main-content -->
+
+{block footer}
+	<footer>
+		<div class="container">
+			{* control navigationByShortcut, 'misc' *}
+		</div>
+	</footer>
+{/block}
+
+{block modal}
+	<div id="default-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content" id="default-modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div id="default-modal-body" class="modal-body">
+				</div>
+			</div>
+		</div>
+	</div>
+{/block}
+
+
+{block scripts}
+	{js('/dist/front.bundle.js', true)}
+
+	{include $vendorCoreFolder . 'www/js/frontend.latte'}
+
+	<script>
+		// jQuery for page scrolling feature - requires jQuery Easing plugin
+		$(function () {
+			$('body').on('click', 'a.page-scroll', function (event) {
+				var url = $(this).attr('href');
+				var anchor = '#' + url.substring(url.indexOf("#") + 1);
+				$('html, body').stop().animate({
+					scrollTop: $(anchor).offset().top
+				}, 1500, 'easeInOutExpo');
+				event.preventDefault();
+			});
+		});
+	</script>
+
+{/block}
+
+
+
+{if substr($baseUrl, -5) === 'local'} {* pouze na .local *}
+	<div id="size-indicator">
+		<span id="size-indicator-content"></span>
+	</div>
+{/if}
+
+</body>
+</html>

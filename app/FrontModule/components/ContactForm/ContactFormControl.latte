@@ -1,0 +1,29 @@
+<div class="contact-form">
+	<h2>{_}Contact us{/_}</h2>
+	{form contactForm}
+		<ul class="errors" n:if="$form->hasErrors()">
+			<li n:foreach="$form->errors as $error">{$error}</li>
+		</ul>
+		<div class="form-group">
+			{label name /}
+			{input name}
+		</div>
+		<div class="form-group">
+			{label email /}
+			{input email}
+		</div>
+		<div class="form-group">
+			{label subject /}
+			{input subject}
+		</div>
+		<div class="form-group">
+			{label message /}
+			{input message}
+		</div>
+		<br>
+		<div id="success"></div>
+		<div class="form-group">
+			{input submit}
+		</div>
+	{/form}
+</div>

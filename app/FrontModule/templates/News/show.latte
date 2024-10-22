@@ -1,0 +1,37 @@
+{block content}
+
+	{if $newsitem->title}
+		{var $newsTitle = $newsitem->title}
+	{elseif $newsitem->articles_id}
+		{var $newsTitle = $newsitem->articles->title}
+	{else}
+		{var $newsTitle = $newsitem->publish_date->format('j.n.Y')}
+	{/if}
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h2>{$newsTitle}</h2>
+
+			{if $newsitem->articles_id}
+				{var $article = $newsitem->ref('articles', 'articles_id')}
+
+				{if $article->images_id}
+					{var $image = $article->ref('images', 'images_id')}
+					<img class="thumb img-fluid" src="/{$thumbFolder}/{$image->file}" alt="{$image->title}" />
+				{/if}
+				<p>
+					{$article->perex|noescape}
+				</p>
+
+				{$article->content|noescape}
+			{/if}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<a class="btn btn-default" n:href="News:default">{_'Back'}</a>
+		</div>
+	</div>
+
+{/block}

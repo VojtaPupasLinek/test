@@ -1,0 +1,64 @@
+{block content}
+
+<h2>{_}News{/_}</h2>
+
+<div class="row">		
+		
+	<div class="col-md-12 text-right">
+		{form searchForm, class=>'form-inline ajax'}
+			{label searchstring/}
+			{input searchstring, class=>'form-control'}
+			{input submit, class=> 'btn btn-sm btn-primary'}
+			<a class="btn btn-sm btn-default" n:href="default, 1">{_}Reset{/_}</a>
+		{/form}
+	</div>
+
+	{snippet newslist}
+		
+	{if count($news)}
+		{foreach $news as $newsitem}
+
+			{if $newsitem->title}
+				{var $newsTitle = $newsitem->title}
+			{elseif $newsitem->articles_id}
+				{var $newsTitle = $newsitem->articles->title}
+			{else}
+				{var $newsTitle = $newsitem->publish_date->format('j.n.Y')}
+			{/if}
+
+			
+			<div class="col-md-12">
+				<a n:href="News:Show $newsitem->id">
+					<h3>{$newsTitle}</h3>
+				</a>
+				{if $newsitem->articles_id}
+					{var $article = $newsitem->ref('articles', 'articles_id')}
+
+					{if $article->images_id}
+						{var $image = $article->ref('images', 'images_id')}
+						<img class="thumb img-fluid" src="/{$thumbFolder}/{$image->file}" alt="{$image->title}" />
+					{/if}
+					<p>
+						{$article->perex|noescape}
+					</p>
+				{/if}
+			</div>
+		{/foreach}
+
+	{else}
+	<div class="col-md-12">
+		<p>
+		{_}No records found{/_}
+		</p>
+	</div>
+	{/if}
+		
+	<div class="col-md-12">
+		{include '../paginator.latte', paginator=>$paginator, link=>'this'}
+	</div>
+	{/snippet}
+
+</div>
+	
+{/block}
+

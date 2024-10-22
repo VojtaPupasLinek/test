@@ -1,0 +1,35 @@
+{if count($partner_categories)}
+	<h2>{_}Partners{/_}</h2>
+
+	{foreach $partner_categories as $partner_category}
+		<div class="partner-category" id="partner-category_{$partner_category->id}">
+			<h3>{$partner_category->title}</h3>
+		</div>
+		{var $partner_links = $partner_category->related('partner_category2partners')->where('partners.lang = ? OR partners.lang IS NULL',$lang)->where('partners.active=1')->order('partners.order ASC')}
+
+		<div class="row">
+			{foreach $partner_links as $partner_link}
+				{var $partner = $partner_link->ref('partners')}
+
+				<div class="col-xs-4 col-sm-3 col-md-2 text-center">
+					<div class="partner-wrap">
+						{if $partner->images_id}
+							{var $image = $partner->ref('images')}
+							<img class="img-fluid" src="/{$imagesFolder}/{$image->file}" alt="{$partner->name}">
+						{/if}
+						<div class="desc">
+							<h4>
+								<a target="_blank" href="{$partner->link|noescape}" n:tag-if="$partner->link">
+									{$partner->name}
+								</a>
+							</h4>
+							{$partner->description|noescape}
+						</div>
+					</div>
+				</div>
+
+			{/foreach}
+		</div>
+
+	{/foreach}
+{/if}

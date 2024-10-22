@@ -1,0 +1,16 @@
+{if $articles}
+	<h2>{$category->title}</h2>
+	<div class="row">
+		{foreach $articles as $article}
+			<div class="col-12">
+				<a href="{plink :Front:Articles:detail $article->id, ($article->title|webalize)}">
+					<h3>{$article->title}</h3>
+				</a>
+				<p>{$article->perex|noescape}</p>
+				<a class="btn btn-light" href="{plink :Front:Articles:detail $article->id, ($article->title|webalize)}">
+					{_}More{/_}
+				</a>
+			</div>
+		{/foreach}
+	</div>
+{/if}

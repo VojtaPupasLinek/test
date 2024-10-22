@@ -1,0 +1,29 @@
+{block content}
+
+	<h2>{_'Partners'}</h2>
+
+	{snippet partnerlist}
+		{if count($partners)}
+			<div class="row">
+				{foreach $partners as $partner}
+					<div class="col-sm-4 col-md-3 text-center" id="partner_{$partner->id}">
+						{if $partner->images_id}
+							<a n:href="Partners:Show $partner->id">
+								{var $image = $partner->ref('images')}
+								<img class="img-fluid" src="/{$imagesFolder}/{$image->file}" alt="{$partner->name}">
+							</a>
+						{/if}
+						<a n:href="Partners:Show $partner->id">
+							<h3 class="h4">{$partner->name}</h3>
+						</a>
+						{$partner->description|noescape}
+					</div>
+				{/foreach}
+			</div>
+
+		{else}
+			<p>{_'No records found'}</p>
+		{/if}
+	{/snippet}
+
+{/block}

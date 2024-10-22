@@ -1,0 +1,33 @@
+<!-- articles pagination-->
+
+<nav aria-label="Articles navigation">
+	<ul class="pagination articles-pagination">
+		{if $paginator->page!=1}
+			<li class="page-item"><a class="page-link"  n:href="default 1" aria-label="First Page"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+		{else}
+			<li class="disabled page-item"><a class="page-link disabled"  href="#" aria-label="First Page"><i class="fa fa-angle-double-left inactive" aria-hidden="true"></i></a></li>
+		{/if}
+
+		{var $page = $paginator->page - 1}
+		{if $page > 0}
+			<li class="page-item"><a class="page-link"   n:href="default $page" aria-label="Previous"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+		{else}
+			<li class="page-item disabled"><a class="page-link disabled" href="#" aria-label="Previous"><i class="fa fa-angle-left inactive" aria-hidden="true"></i></a></li>
+		{/if}
+
+		<li class="page-item active"><a class="page-link active" href="#"><span>{$paginator->page}</span></a></li>
+
+		{var $page = $paginator->page + 1}
+		{if $page <= $paginator->getLastPage()}
+			<li class="page-item"><a class="page-link" n:href="default $page" aria-label="Next"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+		{else}
+			<li class="page-item disabled"><a class="page-link disabled" href="#" aria-label="Next"> <i class="fa fa-angle-right inactive" aria-hidden="true"></i></a></li>
+		{/if}
+
+		{if $paginator->page!=$paginator->getLastPage()}
+			<li class="page-item"><a class="page-link" n:href="default $paginator->getLastPage()" aria-label="Last Page"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+		{else}
+			<li class="page-item disabled"><a href="#"  class="page-link disabled" aria-label="Last Page"><i class="fa fa-angle-double-right inactive" aria-hidden="true"></i></a></li>
+		{/if}
+	</ul>
+</nav>

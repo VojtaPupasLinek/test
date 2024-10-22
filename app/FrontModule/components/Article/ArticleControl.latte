@@ -1,0 +1,57 @@
+<div class="row article">
+	<div class="col-sm-12">
+		<h2>{$article->title|noescape}</h2>
+        {$article->content|noescape}
+	</div>
+</div>
+
+{var $images = $article->related('articles2images')->order('order ASC')}
+{if count($images)}
+	<h3>{_}Fotogalerie{/_}</h3>
+	<div class="row article-images">
+        {foreach $images as $articles2image}
+            {var $image = $articles2image->images}
+            {var $imgtitle = $articles2image->title_override ? $articles2image->title_override : $image->title}
+            {var $imgsubtitle = $articles2image->subtitle_override ? $articles2image->subtitle_override : $image->subtitle}
+			<div class="col-sm-4">
+				<div class="article-images-item">
+					<a class="lightbox" rel="gallery-{$article->id}" href="/{$imagesFolder}/{$image->file}" title="{$imgtitle}{$imgsubtitle ? ' :: '.$imgsubtitle}">
+						<img class="img-fluid" src="/{$thumbFolder}/{$image->file}" alt="{$imgtitle}">
+					</a>
+				</div>
+			</div>
+        {/foreach}
+	</div>
+{/if}
+
+{var $videos = $article->related('articles2videos')->order('order ASC')}
+{if count($videos)}
+	<h3>{_}Videa{/_}</h3>
+	<div class="row article-videos">
+        {foreach $videos as $articles2video}
+            {var $video = $articles2video->videos}
+			<div class="col-sm-4 article-videos-item">
+				<div class="embed-responsive{if $video->ratio} embed-responsive-{str_replace(":","by",$video->ratio)}{/if}">
+					<iframe class="embed-responsive-item" src="{$video->embed|videoEmbed}" allowfullscreen></iframe>
+				</div>
+			</div>
+        {/foreach}
+	</div>
+{/if}
+
+{var $documents = $article->related('articles2documents')->order('order ASC')}
+{if count($documents)}
+	<h3>{_}Ke stažení{/_}</h3>
+	<div class="row article-attachments">
+        {foreach $documents as $articles2document}
+            {var $document = $articles2document->documents}
+            {var $doctitle = $articles2document->title_override ? $articles2document->title_override : $document->title}
+            {var $docsubtitle = $articles2document->subtitle_override ? $articles2document->subtitle_override : $document->subtitle}
+			<div class="col-sm-12 article-attachments-item">
+				<a href="/{$documentFolder}/{$document->file}" class="lightbox" title="{$doctitle}{$docsubtitle ? ' :: '.$docsubtitle}" target="_blank">
+					<span class="glyphicon glyphicon-file" aria-hidden="true"></span> {$doctitle}
+				</a>
+			</div>
+        {/foreach}
+	</div>
+{/if}

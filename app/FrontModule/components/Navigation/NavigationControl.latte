@@ -1,0 +1,75 @@
+
+{**
+ * The Navigation control template
+ *
+ * @param  Control   $control
+*}
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span> <!-- or  <i class="fa fa-bars" aria-hidden="true"></i>  -->
+	</button>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="main-menu">
+
+		<!--samotné menu-->
+		<ul class="navbar-nav mr-auto">
+            {if $structure}
+                {foreach $structure as $i=>$structureitem}
+                    {var $subitems_clone = clone $model_subitems}
+                    {var $subitems = $subitems_clone->where('parent = ?', $structureitem->id)}
+                    {var $subitem_active = false}
+                    {foreach $subitems as $j=>$subitem}
+                        {if $subitem->id == $current}{var $subitem_active = true}{/if}
+                    {/foreach}
+					<li class="nav-item {if $structureitem->id == $current}active {/if}{if count($subitems)}dropdown {/if}">
+						<a class="nav-link {if $structureitem->id == $current || $subitem_active}active {/if}{if count($subitems)}dropdown-toggle {/if}" href="{if count($subitems)}#{else}{$structureitem|structureLink}{/if}" {if count($subitems)} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"{/if}>
+                            {$structureitem->name}
+                            {if count($subitems)}
+								<span class="caret"></span>{/if}
+						</a>
+                        {if count($subitems)}
+							<div class="dropdown-menu" aria-labelledby="main-menu">
+                                {foreach $subitems as $j=>$subitem}
+									<a class="dropdown-item {if $subitem->id == $current}active{/if}" href="{$subitem|structureLink}">{$subitem->name}</a>
+                                {/foreach}
+							</div>
+                        {/if}
+					</li>
+                {/foreach}
+            {/if}
+		</ul>
+
+		<!--jazyky-->
+		<ul class="navbar-nav d-flex order-3 ml-2">
+			{foreach $langs as $select_lang}
+				{if $lang != $select_lang}
+					<li class="nav-item">
+						<a href="/{$select_lang}/" class="nav-link {$select_lang}" title="{_}label_lang_{$select_lang}{/_}">{$select_lang|upper}</a>
+					</li>
+				{/if}
+			{/foreach}
+		</ul>
+		<ul class="navbar-nav d-flex order-3 ml-2">
+			<li class="nav-item">
+                {control sign}
+			</li>
+		</ul>
+
+
+		<form id="search_form" class="form-inline my-2 my-lg-0" action="{plink Search:}">
+			<div class="input-group">
+				<input type="text" class="form-control search-input" name="searchstring" aria-label="Search" id="searchstring" placeholder="{_}Search{/_}">
+				<div class="input-group-append">
+					<button type="submit" class="btn btn-default btn-success" id="submit_search">{_}Submit{/_}</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+	<!-- /.navbar-collapse -->
+</nav>
+

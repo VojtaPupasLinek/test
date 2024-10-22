@@ -1,0 +1,15 @@
+{* Latte template *}
+
+{block content}
+<div class="container">
+	<div class="col-sm-12">
+		<div class="cell">
+			<h2>Rubriky</h2>
+			<ul>
+				{foreach $categories as $category}
+					<li><a n:href="Category:content $category->id, ($category->title|webalize)">{$category->title}</a></li>
+					{/foreach}
+			</ul>
+		</div>
+	</div>
+</div>

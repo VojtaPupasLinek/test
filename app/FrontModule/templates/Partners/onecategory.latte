@@ -1,0 +1,77 @@
+{block content}
+
+<div class="row">
+	<div class="col-sm-12">
+		<h2>{_'Partneři'} - {$partner_category->title}</h2>
+		<form class="form-inline pull-right" role="form">
+			<div class="form-group">
+				<label class="" for="partner-search-input">{_'Vyhledávání'}: </label>
+				<input type="text" id="partner-search-input" class="form-control" placeholder="{_'napište jméno'}">
+			</div>
+			<button type="submit" id="partner-search-button" class="btn btn-default">{_'Hledat'}</button>
+		</form>
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+{snippet partnerlist}
+
+	{if count($partners)}
+		<div class="row">
+		{foreach $partners as $partner}
+				<div class="col-sm-4 col-md-3 col-lg-2" id="partner_{$partner->id}">
+					<a n:href="Partners:Show $partner->id">
+						<h3>{$partner->name} </h3>
+						{if $partner->images_id}
+							{var $image = $partner->ref('images')}
+							<img class="img-fluid pull-right" src="/{$imagesFolder}/{$image->file}">
+						{/if}
+					</a>
+				</div>
+		{/foreach}
+		</div>
+
+	{else}
+		<div class="row">
+			<div class="col-md-12">
+				{_'Nebyly nalezeny žádné záznamy'}....
+			</div>
+		</div>
+	{/if}
+
+{/snippet}
+
+
+{/block}
+
+{block scripts}
+{include parent}
+<script>
+	$(document).ready(function () {
+		$("#partner-search-button").click(function () {
+//			console.log("klik: " + $("#partner-search-input").val());
+			$.ajax({
+				url: {link searchInCategory!},
+				type: "POST",
+				data: { category_id: {$category_id}, searchstring: $("#partner-search-input").val() }
+			}).done(function (payload) {
+//				console.log(payload);
+				// snippety
+				if (payload.snippets) {
+					for (var i in payload.snippets) {
+//						console.log("překresluji " + i);
+//						console.log("html: " + payload.snippets[i]);
+						$("#" + i).html(payload.snippets[i]);
+					}
+				}
+			});
+			return false;
+		});
+	});
+</script>
+{/block}
+
+
+{block navigation}
+{control navigation, $current}
+{/block}

@@ -1,0 +1,57 @@
+{
+	"name": "oxit/oxitweb-demo",
+	"description": "Template for OXIT web projects",
+	"keywords": [
+		"oxitweb",
+		"nette"
+	],
+	"type": "project",
+	"license": [
+		"proprietary"
+	],
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "git@github.com:OXIT-cz/oxitweb-core.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:OXIT-cz/utils.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:OXIT-cz/database-mapping.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:OXIT-cz/flash-messages.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:OXIT-cz/recaptcha-submit.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:OXIT-cz/fileupload.git"
+		}
+	],
+	"require": {
+		"oxit/oxitweb-core": "^0.43.4"
+	},
+	"autoload": {
+		"classmap": [
+			"app/Bootstrap.php"
+		]
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"config": {
+		"preferred-install": {
+			"oxit/*": "source",
+			"*": "dist"
+		},
+		"allow-plugins": {
+			"php-http/discovery": false
+		}
+	}
+}

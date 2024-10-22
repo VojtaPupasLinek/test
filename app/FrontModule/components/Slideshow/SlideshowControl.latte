@@ -1,0 +1,43 @@
+<div id="carousel-{$slideshow->id}" class="carousel slide carousel-fade" data-ride="carousel">
+
+    {* Dots indicators *}
+    <ol class="carousel-indicators">
+        {foreach $slides as $slide}
+            <li data-target="#carousel-{$slideshow->id}" data-slide-to="{$iterator->counter-1}" n:class="$iterator->first ? active"></li>
+        {/foreach}
+    </ol>
+
+    {* Items *}
+    <div class="carousel-inner">
+        {foreach $slides as $slide}
+
+            <div n:class="carousel-item, $iterator->first ? active">
+
+                {if $slide->images_id}
+                    {var $image = $slide->images}
+                    <img class="d-block w-100" src="/{$imagesFolder}/{$image->file}" alt="{$image->title}" />
+                {/if}
+
+                <div class="carousel-caption d-none d-md-block">
+                    <h2>
+                        <a n:tag-if="$slide->link" href="{$slide->link}">
+                            {$slide->title}
+                        </a>
+                    </h2>
+                </div>
+            </div>
+        {/foreach}
+    </div>
+
+    {* Navigation *}
+
+    <a class="carousel-control-prev" href="#carousel-{$slideshow->id}" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">{_'Previous'}</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel--{$slideshow->id}" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">{_'Next'}</span>
+    </a>
+
+</div>

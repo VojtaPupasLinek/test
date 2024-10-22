@@ -1,0 +1,83 @@
+{block content}
+
+<div class="page-wrapper">
+	<header class="page-heading clearfix">
+		<h1 class="heading-title pull-left">{_'Partneři'}</h1>
+		{block breadcrumbs}
+		<div class="breadcrumbs pull-right">
+			<ul class="breadcrumbs-list">
+				<li class="breadcrumbs-label">{_}Nacházíte se zde{/_}:</li>
+				<li>
+					<a href="/{$lang}/">{_}Home{/_}</a>
+					<i class="fa fa-angle-right"></i>
+				</li>
+				<li class="current">{_'Partneři'}</li>
+			</ul>
+		</div><!--//breadcrumbs-->
+		{/block}
+	</header> 
+	<div class="page-content">    
+		<div class="page-row">
+			{control articles, $current}
+		</div>
+
+		{snippet partnerlist}
+
+			{if count($partner_categories)}
+
+				{foreach $partner_categories as $partner_category}
+					<div class="page-row" id="partner-category_{$partner_category->id}">
+						<h3>{$partner_category->title}</h3>
+					</div>
+					{var $partner_links = $partner_category->related('partner_category2partners')->where('partners.lang',$lang)->where('partners.active=1')->order('partners.order ASC')}
+
+					<div class="row page-row">
+						{foreach $partner_links as $partner_link}
+							{var $partner = $partner_link->ref('partners')}
+
+							<div class="col-xs-4 col-sm-3 col-md-2 text-center" id="partner_{$partner->id}">
+								<div class="partner-cover">
+									{if $partner->images_id}
+										{var $image = $partner->ref('images')}
+										<a n:href="Partners:Show $partner->id">
+											<img class="img-fluid" src="/{$imagesFolder}/{$image->file}" alt="{$partner->name}">
+										</a>
+									{/if}
+									<div class="desc">
+										<h4><small>
+												{if $partner->link}
+													<a target="_blank" href="{$partner->link|noescape}">
+												{else}
+													<a n:href="Partners:Show $partner->id">
+												{/if}
+													{$partner->name}
+												</a>
+											</small>
+										</h4>
+										<p>{$partner->description}</p>
+									</div>
+								</div>
+							</div>
+
+						{/foreach}
+					</div>
+
+				{/foreach}
+
+			{else}
+				<div class="row page-row">
+					<div class="col-md-12">
+						{_'Nebyly nalezeny žádné záznamy'}....
+					</div>
+				</div>
+			{/if}
+
+		{/snippet}						
+
+
+	</div><!--//page-content-->
+</div><!--//page--> 
+{/block}
+
+{block carousel-partners}
+{/block}

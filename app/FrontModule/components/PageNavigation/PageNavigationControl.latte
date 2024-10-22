@@ -1,0 +1,20 @@
+<nav class="navbar navbar-light navbar-expand-lg bg-light">
+    <a class="navbar-brand float-left mr-5" href="/{$lang}">
+        {control textSnippet-webTitle}
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="page-menu">
+        <ul class="nav navbar-nav">
+            {foreach $structureComponents as $component}
+                {if $component->title}
+                    <li class="nav-item active">
+                        <a class="nav-link page-scroll" href="#section-{if $component->title}{$component->title|webalize}{else}{$component->id}{/if}">{$component->title}</a>
+                    </li>
+                {/if}
+            {/foreach}
+        </ul>
+    </div>
+</nav>
